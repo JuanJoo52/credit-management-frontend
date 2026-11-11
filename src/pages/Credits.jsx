@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { api } from '../api'
+import { Link } from 'react-router-dom'
 
 const STATUS = { PENDING: 'Pendiente', APPROVED: 'Aprobada', REJECTED: 'Rechazada', DISBURSED: 'Desembolsada' }
 const FILTERS = [['', 'Todas'], ['PENDING', 'Pendientes'], ['APPROVED', 'Aprobadas'], ['DISBURSED', 'Desembolsadas'], ['REJECTED', 'Rechazadas']]
@@ -84,9 +85,9 @@ export default function Credits() {
                     <td>{day(r.createdAt)}</td>
                     <td><span className={'bd ' + st}><i />{STATUS[r.status] || r.status}</span></td>
                     <td className="r">
-                      {r.status === 'PENDING'
-                        ? <button type="button" className="rv">Revisar</button>
-                          : <button type="button" className="rv alt">Ver detalle</button>}
+                      <Link className={'rv' + (['PENDING', 'APPROVED'].includes(r.status) ? '' : ' alt')} to={`/panel/credits/${r.id}`}>
+                        {['PENDING', 'APPROVED'].includes(r.status) ? 'Revisar' : 'Ver detalle'}
+                      </Link>
                     </td>
                   </tr>
                 )
