@@ -4,6 +4,7 @@ import Request from './pages/Request'
 import Login from './pages/Login'
 import Panel from './pages/Panel'
 import { getToken, tokenExp, clearSession, isLoggedIn } from './auth'
+import CreditDetail from './pages/CreditDetail'
 
 function RequireAuth({ children }) {
   const nav = useNavigate()
@@ -22,6 +23,7 @@ export default function App() {
       <Route path="/" element={<Request />} />
       <Route path="/login" element={<Login />} />
       <Route path="/panel" element={<RequireAuth><Panel /></RequireAuth>} />
+      <Route path="/panel/credits/:id" element={<RequireAuth><CreditDetail /></RequireAuth>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
