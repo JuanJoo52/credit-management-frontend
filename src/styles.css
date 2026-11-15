@@ -114,3 +114,24 @@ a.rv{display:inline-flex;align-items:center;text-decoration:none}
 .sched thead th{position:sticky;top:0}
 .bd.paid{background:#DDF3E4;color:#14532D}.bd.paid i{background:#22A559}
 .bd.overdue{background:#FDECEA;color:#8A1C12}.bd.overdue i{background:#D92D20}
+.tabs{display:flex;gap:28px;padding:0 36px;border-bottom:1px solid #EEE7E0}
+.tabs a{padding:14px 0 12px;font-size:15px;font-weight:600;color:#5A504A;text-decoration:none;border-bottom:3px solid transparent}
+.tabs a[aria-current=page]{color:#211B18;border-bottom-color:#C7410F}
+.tabs a:focus-visible,.u-ed:focus-visible,.u-tg:focus-visible{outline:3px solid #C7410F;outline-offset:2px}
+.us-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.btn.mk{height:48px;font-size:15px}
+.btn.danger{background:#B42318}
+.rl{display:inline-block;padding:5px 12px;border-radius:999px;background:#EDE7E0;color:#3F362F;font-size:13px;font-weight:600}
+.you{margin-left:8px;padding:2px 8px;border-radius:999px;background:#211B18;color:#fff;font-size:12px;font-weight:600}
+.bd.active{background:#DDF3E4;color:#14532D}.bd.active i{background:#22A559}
+.bd.inactive{background:#EEE9E4;color:#4A4039}.bd.inactive i{background:#8C827B}
+.u-acts{display:flex;justify-content:flex-end;gap:8px}
+.u-ed{height:36px;padding:0 16px;border:1.5px solid #8C827B;border-radius:999px;background:#fff;color:#211B18;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.u-tg{height:36px;padding:0 14px;border:none;border-radius:999px;background:transparent;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.u-tg.de{color:#B42318}.u-tg.ac{color:#C7410F}
+.u-tg:disabled{color:#8C827B;cursor:not-allowed}
+.ov{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto;background:rgba(33,27,24,.55)}
+.dlg{width:100%;max-width:480px;padding:32px;border-radius:28px;background:#fff;box-shadow:0 20px 60px rgba(33,27,24,.25);display:flex;flex-direction:column;gap:18px}
+.dlg h2{margin:0;font-size:26px;font-weight:700;letter-spacing:-.8px}
+.dlg p{margin:0}
+@media (max-width:640px){.tabs{padding:0 24px}.dlg{padding:24px}}
