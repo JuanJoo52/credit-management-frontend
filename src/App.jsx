@@ -6,6 +6,7 @@ import Panel from './pages/Panel'
 import CreditDetail from './pages/CreditDetail'
 import Users from './pages/Users'
 import { getToken, getUser, tokenExp, clearSession, isLoggedIn } from './auth'
+import Customers from './pages/Customers'
 
 function RequireAuth({ children }) {
   const nav = useNavigate()
@@ -30,6 +31,7 @@ export default function App() {
       <Route path="/panel" element={<RequireAuth><Panel /></RequireAuth>} />
       <Route path="/panel/credits/:id" element={<RequireAuth><CreditDetail /></RequireAuth>} />
       <Route path="/panel/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
+      <Route path="/panel/customers" element={<RequireAuth><Customers /></RequireAuth>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

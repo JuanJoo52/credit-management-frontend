@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { api } from '../api'
 import { getUser } from '../auth'
 import PanelFrame from '../PanelFrame'
+import CustomerDialog from '../CustomerDialog'
 
 const STATUS = { PENDING: 'Pendiente', APPROVED: 'Aprobada', REJECTED: 'Rechazada', DISBURSED: 'Desembolsada' }
 const INST = { PENDING: 'Pendiente', PAID: 'Pagada', OVERDUE: 'Vencida' }
@@ -24,6 +25,10 @@ function Back() {
 export default function CreditDetail() {
   const { id } = useParams()
   const isAdmin = getUser()?.role === 'ADMIN'
+  const canEditCustomer = ['ADMIN', 'ADVISOR'].includes(getUser()?.role)
+  const [editCustomer, setEditCustomer] = useState(null)
+  const [custBusy, setCustBusy] = useState(false)
+  const [custError, setCustError] = useState('')
   const [credit, setCredit] = useState(null)
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState('')
@@ -61,6 +66,15 @@ export default function CreditDetail() {
   }
   const disburse = () => run(`/credits/${id}/disburse`, 'POST')
   const rejectForCapacity = () => { setActionError(''); setReason(CAPACITY_REASON); setRejecting(true) }
+  const openCustomer = async () => {
+    setCustError(''); setCustBusy(true)
+    try {
+      const { ok, data } = await api(`/customers/by-document/${encodeURIComponent(credit.customer.documentNumber)}`)
+      if (ok) setEditCustomer(data.data)
+      else setCustError(data.message || 'No pudimos cargar los datos del cliente.')
+    } catch { setCustError('No pudimos conectar con el servidor.') }
+    finally { setCustBusy(false) }
+  }
 
   if (loading) return <PanelFrame><p className="note">Cargando solicitud...</p></PanelFrame>
   if (loadError || !credit) {
@@ -97,6 +111,10 @@ export default function CreditDetail() {
             <div><dt>Ingresos al mes</dt><dd>{cop(c.monthlyIncome)}</dd></div>
             <div><dt>Destino</dt><dd>{credit.destination || 'Sin destino'}</dd></div>
           </dl>
+          {canEditCustomer && st === 'PENDING' && <>
+            <button type="button" className="btn ghost small" disabled={custBusy} onClick={openCustomer}>{custBusy ? 'Cargando...' : 'Editar datos del cliente'}</button>
+            {custError && <p className="alert" role="alert">{custError}</p>}
+          </>}
         </section>
 
         <aside className="dt-box dt-act">
@@ -170,7 +188,9 @@ export default function CreditDetail() {
             </table>
           </div>
         </section>
+
       )}
+      {editCustomer && <CustomerDialog mode="edit" customer={editCustomer} onClose={() => setEditCustomer(null)} onDone={() => { setEditCustomer(null); load() }} />}
     </PanelFrame>
   )
 }

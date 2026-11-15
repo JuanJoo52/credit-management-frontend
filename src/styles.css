@@ -135,3 +135,5 @@ a.rv{display:inline-flex;align-items:center;text-decoration:none}
 .dlg h2{margin:0;font-size:26px;font-weight:700;letter-spacing:-.8px}
 .dlg p{margin:0}
 @media (max-width:640px){.tabs{padding:0 24px}.dlg{padding:24px}}
+.input:disabled{background:#F0EBE5;color:#5A504A;cursor:not-allowed}
+.dt-main .btn.small{margin-top:20px}
