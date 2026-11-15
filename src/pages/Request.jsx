@@ -3,6 +3,11 @@ import Shell from '../Shell'
 import { api } from '../api'
 
 const DOC_TYPES = [['CC', 'Cédula de ciudadanía'], ['CE', 'Cédula de extranjería'], ['PASSPORT', 'Pasaporte']]
+const DOC_RULES = {
+  CC: { re: /^[0-9]{6,10}$/, msg: 'La cédula debe tener entre 6 y 10 dígitos, solo números.' },
+  CE: { re: /^[0-9]{6,10}$/, msg: 'La cédula de extranjería debe tener entre 6 y 10 dígitos, solo números.' },
+  PASSPORT: { re: /^[A-Z0-9]{6,12}$/, msg: 'El pasaporte debe tener entre 6 y 12 letras o números.' },
+}
 const STEPS = ['Tus datos', 'Contacto e ingresos', 'Tu crédito']
 const MIN = 100000, MAX = 100000000
 const empty = { documentType: 'CC', documentNumber: '', firstName: '', lastName: '', phone: '', address: '', monthlyIncome: '', amount: '', termMonths: '', destination: '', consent: false, website: '' }
