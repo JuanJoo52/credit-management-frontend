@@ -1,5 +1,5 @@
 import { getToken, clearSession } from './auth'
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api/v1'
+const BASE = import.meta.env.VITE_API_URL
 
 export async function api(path, { method = 'GET', body } = {}) {
   const token = getToken()
