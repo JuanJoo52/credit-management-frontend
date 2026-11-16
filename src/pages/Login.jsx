@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Navigate, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link,Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import Shell from '../Shell'
 import { api } from '../api'
 import { setSession, isLoggedIn } from '../auth'
+
 
 export default function Login() {
   const nav = useNavigate()
@@ -30,6 +31,7 @@ export default function Login() {
       <form className="form" onSubmit={submit} noValidate>
         <h2 className="title">Iniciar sesión</h2>
         {params.get('expired') && !error && <p className="note">Tu sesión venció. Ingresa de nuevo.</p>}
+        {params.get('reset') && !error && <p className="okmsg">Contraseña actualizada. Ingresa con tu nueva contraseña.</p>}
         {error && <p className="alert" role="alert">{error}</p>}
         <div className="field">
           <label htmlFor="email">Correo electrónico</label>
@@ -43,6 +45,7 @@ export default function Login() {
           </div>
         </div>
         <button className="btn" disabled={sending || !email || !pass}>{sending ? 'Entrando...' : 'Entrar'}</button>
+        <Link className="lnk" to="/forgot-password">¿Olvidaste tu contraseña?</Link>
       </form>
     </Shell>
   )

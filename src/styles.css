@@ -137,3 +137,8 @@ a.rv{display:inline-flex;align-items:center;text-decoration:none}
 @media (max-width:640px){.tabs{padding:0 24px}.dlg{padding:24px}}
 .input:disabled{background:#F0EBE5;color:#5A504A;cursor:not-allowed}
 .dt-main .btn.small{margin-top:20px}
+.lnk{color:#C7410F;font-size:14px;font-weight:600;text-decoration:none}
+.lnk:hover{text-decoration:underline}
+.lnk:focus-visible{outline:3px solid #C7410F;outline-offset:2px}
+.okmsg{margin:0;padding:12px 16px;border-radius:16px;background:#DDF3E4;color:#14532D;font-size:14px}
+a.btn{text-decoration:none}
