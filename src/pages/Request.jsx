@@ -19,7 +19,8 @@ const cop = (n) => '$' + n.toLocaleString('es-CO')
 function validate(step, f) {
   const e = {}
   if (step === 0) {
-    if (f.documentNumber.trim().length < 5) e.documentNumber = 'Escribe tu número de documento.'
+    const rule = DOC_RULES[f.documentType]
+    if (!rule.re.test(f.documentNumber.trim())) e.documentNumber = rule.msg
     if (!f.firstName.trim()) e.firstName = 'Escribe tu nombre.'
     if (!f.lastName.trim()) e.lastName = 'Escribe tu apellido.'
   }
