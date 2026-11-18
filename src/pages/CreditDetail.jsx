@@ -6,7 +6,7 @@ import PanelFrame from '../PanelFrame'
 import CustomerDialog from '../CustomerDialog'
 
 const STATUS = { PENDING: 'Pendiente', APPROVED: 'Aprobada', REJECTED: 'Rechazada', DISBURSED: 'Desembolsada' }
-const INST = { PENDING: 'Pendiente', PAID: 'Pagada', OVERDUE: 'Vencida' }
+const INST = { PENDING: 'Pendiente', PAID: 'Pagada', OVERDUE: 'Vencida',PARTIAL:'Con Abono' }
 const cop = (n) => '$' + Math.round(Number(n)).toLocaleString('es-CO')
 const day = (d) => new Date(d).toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/\./g, '')
 const title = (s = '') => s.toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCase())
