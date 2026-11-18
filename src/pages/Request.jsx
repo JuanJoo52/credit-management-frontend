@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Shell from '../Shell'
 import { api } from '../api'
+import Simulator from '../Simulator'
 
 const DOC_TYPES = [['CC', 'Cédula de ciudadanía'], ['CE', 'Cédula de extranjería'], ['PASSPORT', 'Pasaporte']]
 const DOC_RULES = {
@@ -139,6 +140,7 @@ export default function Request() {
             </Field>
             <Field id="termMonths" label="Plazo en meses (1 a 72)" error={errors.termMonths}>
               <input {...inp('termMonths')} inputMode="numeric" placeholder="12" value={f.termMonths} onChange={(e) => set('termMonths', e.target.value.replace(/\D/g, '').slice(0, 2))} />
+              <Simulator amount={num(f.amount)} termMonths={Number(f.termMonths)} />
             </Field>
             <Field id="destination" label="¿Para qué lo usarás? (opcional)">
               <input {...inp('destination')} placeholder="Libre inversión" value={f.destination} onChange={(e) => set('destination', e.target.value)} />
