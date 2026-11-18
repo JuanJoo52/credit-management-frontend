@@ -4,6 +4,7 @@ export const getToken = () => sessionStorage.getItem(K)
 export const getUser = () => { try { return JSON.parse(sessionStorage.getItem(U)) } catch { return null } }
 export const setSession = (t, u) => { sessionStorage.setItem(K, t); sessionStorage.setItem(U, JSON.stringify(u)) }
 export const clearSession = () => { sessionStorage.removeItem(K); sessionStorage.removeItem(U) }
+export const getHomePath = () => getUser()?.role === 'CASHIER' ? '/panel/collections' : '/panel'
 export function tokenExp(t) {
   try { return JSON.parse(atob(t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).exp || null } catch { return null }
 }

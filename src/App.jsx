@@ -5,11 +5,12 @@ import Login from './pages/Login'
 import Panel from './pages/Panel'
 import CreditDetail from './pages/CreditDetail'
 import Users from './pages/Users'
-import { getToken, getUser, tokenExp, clearSession, isLoggedIn } from './auth'
+import { getToken, getUser, tokenExp, clearSession, isLoggedIn, getHomePath } from './auth'
 import Customers from './pages/Customers'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import NewCredit from './pages/NewCredit'
+import Collections from './pages/Collections'
 
 function RequireAuth({ children }) {
   const nav = useNavigate()
@@ -23,10 +24,10 @@ function RequireAuth({ children }) {
 }
 
 function RequireAdmin({ children }) {
-  return getUser()?.role === 'ADMIN' ? children : <Navigate to="/panel" replace />
+  return getUser()?.role === 'ADMIN' ? children : <Navigate to={getHomePath()} replace />
 }
 function RequireRoles({ roles, children }) {
-  return roles.includes(getUser()?.role) ? children : <Navigate to="/panel" replace />
+  return roles.includes(getUser()?.role) ? children : <Navigate to={getHomePath()} replace />
 }
 
 export default function App() {
@@ -36,11 +37,12 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
-      <Route path="/panel" element={<RequireAuth><Panel /></RequireAuth>} />
+      <Route path="/panel" element={<RequireAuth><RequireRoles roles={['ADMIN', 'ADVISOR']}><Panel /></RequireRoles></RequireAuth>} />
+      <Route path="/panel/collections" element={<RequireAuth><RequireRoles roles={['CASHIER']}><Collections /></RequireRoles></RequireAuth>} />
       <Route path="/panel/credits/new" element={<RequireAuth><RequireRoles roles={['ADMIN', 'ADVISOR']}><NewCredit /></RequireRoles></RequireAuth>} />
-      <Route path="/panel/credits/:id" element={<RequireAuth><CreditDetail /></RequireAuth>} />
+      <Route path="/panel/credits/:id" element={<RequireAuth><RequireRoles roles={['ADMIN', 'ADVISOR']}><CreditDetail /></RequireRoles></RequireAuth>} />
       <Route path="/panel/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
-      <Route path="/panel/customers" element={<RequireAuth><Customers /></RequireAuth>} />
+      <Route path="/panel/customers" element={<RequireAuth><RequireRoles roles={['ADMIN', 'ADVISOR']}><Customers /></RequireRoles></RequireAuth>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

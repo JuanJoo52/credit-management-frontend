@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link,Navigate, useNavigate, useSearchParams } from 'react-router-dom'
 import Shell from '../Shell'
 import { api } from '../api'
-import { setSession, isLoggedIn } from '../auth'
+import { setSession, isLoggedIn, getHomePath } from '../auth'
 
 
 export default function Login() {
@@ -13,14 +13,14 @@ export default function Login() {
   const [show, setShow] = useState(false)
   const [error, setError] = useState('')
   const [sending, setSending] = useState(false)
-  if (isLoggedIn()) return <Navigate to="/panel" replace />
+  if (isLoggedIn()) return <Navigate to={getHomePath()} replace />
 
   const submit = async (e) => {
     e.preventDefault()
     setError(''); setSending(true)
     try {
       const { ok, data } = await api('/auth/login', { method: 'POST', body: { email: email.trim(), password: pass } })
-      if (ok && data.data?.token) { setSession(data.data.token, data.data.user); nav('/panel', { replace: true }) }
+      if (ok && data.data?.token) { setSession(data.data.token, data.data.user); nav(getHomePath(), { replace: true }) }
       else setError(data.message || 'No pudimos iniciar sesión. Intenta de nuevo.')
     } catch { setError('No pudimos conectar con el servidor. Intenta de nuevo en unos minutos.') }
     finally { setSending(false) }
