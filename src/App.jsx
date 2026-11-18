@@ -9,6 +9,7 @@ import { getToken, getUser, tokenExp, clearSession, isLoggedIn } from './auth'
 import Customers from './pages/Customers'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
+import NewCredit from './pages/NewCredit'
 
 function RequireAuth({ children }) {
   const nav = useNavigate()
@@ -24,6 +25,9 @@ function RequireAuth({ children }) {
 function RequireAdmin({ children }) {
   return getUser()?.role === 'ADMIN' ? children : <Navigate to="/panel" replace />
 }
+function RequireRoles({ roles, children }) {
+  return roles.includes(getUser()?.role) ? children : <Navigate to="/panel" replace />
+}
 
 export default function App() {
   return (
@@ -33,6 +37,7 @@ export default function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/panel" element={<RequireAuth><Panel /></RequireAuth>} />
+      <Route path="/panel/credits/new" element={<RequireAuth><RequireRoles roles={['ADMIN', 'ADVISOR']}><NewCredit /></RequireRoles></RequireAuth>} />
       <Route path="/panel/credits/:id" element={<RequireAuth><CreditDetail /></RequireAuth>} />
       <Route path="/panel/users" element={<RequireAuth><RequireAdmin><Users /></RequireAdmin></RequireAuth>} />
       <Route path="/panel/customers" element={<RequireAuth><Customers /></RequireAuth>} />

@@ -142,3 +142,27 @@ a.rv{display:inline-flex;align-items:center;text-decoration:none}
 .lnk:focus-visible{outline:3px solid #C7410F;outline-offset:2px}
 .okmsg{margin:0;padding:12px 16px;border-radius:16px;background:#DDF3E4;color:#14532D;font-size:14px}
 a.btn{text-decoration:none}
+a.btn{text-decoration:none}
+.sim{display:flex;flex-direction:column;gap:12px;padding:20px;border-radius:20px;background:#F6F2ED}
+.dt-box .sim{background:#fff}
+.sim-k{font-size:13px;font-weight:600;color:#5A504A}
+.sim-big{font-size:34px;font-weight:800;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.sim-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin:0}
+.sim-kv dt{font-size:13px;color:#5A504A}
+.sim-kv dd{margin:3px 0 0;font-size:15px;font-weight:700}
+.sim summary{cursor:pointer;font-size:14px;font-weight:700;color:#C7410F}
+.sim summary:focus-visible{outline:3px solid #C7410F;outline-offset:2px}
+.sim-sc{max-height:200px;overflow:auto;margin-top:10px;border:1px solid #E3DBD3;border-radius:14px;background:#fff}
+.sim-sc table{min-width:420px;font-size:13px;font-variant-numeric:tabular-nums}
+.sim-sc thead th{position:sticky;top:0;padding:10px 14px}
+.sim-sc tbody td{padding:9px 14px}
+.warn{margin:0;padding:12px 16px;border-radius:16px;background:#FFF1D6;color:#7A4A00;font-size:14px;line-height:1.45}
+.nr-box{flex:1 1 380px;align-self:flex-start;display:flex;flex-direction:column;gap:16px}
+.nr-h{margin:0;font-size:20px;font-weight:700;letter-spacing:-.4px}
+.nr-fs{display:flex;flex-direction:column;gap:16px;min-width:0;margin:0;padding:0;border:0}
+.srow{display:flex;gap:10px}.srow .input{flex:1}
+.sbtn{height:52px;padding:0 24px;border:none;border-radius:999px;background:#211B18;color:#fff;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.sbtn:disabled{opacity:.55;cursor:not-allowed}
+.sbtn:focus-visible{outline:3px solid #C7410F;outline-offset:2px}
+.found{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:#fff}
+.okc{display:inline-block;margin-left:6px;padding:3px 10px;border-radius:999px;background:#DDF3E4;color:#14532D;font-size:12px;font-weight:600}
