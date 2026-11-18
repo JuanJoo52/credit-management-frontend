@@ -9,6 +9,7 @@ export default function PanelFrame({ children }) {
   const { pathname } = useLocation()
   const user = getUser()
   const isAdmin = user?.role === 'ADMIN'
+  const isCashier = user?.role === 'CASHIER'
   const onUsers = pathname.startsWith('/panel/users')
   const onCustomers = pathname.startsWith('/panel/customers')
   const ini = (user?.name || '').split(' ').map((p) => p[0]).slice(0, 2).join('').toUpperCase()
@@ -24,8 +25,10 @@ export default function PanelFrame({ children }) {
         </div>
       </header>
       <nav className="tabs" aria-label="Secciones">
-        <Link to="/panel" aria-current={!onUsers && !onCustomers ? 'page' : undefined}>Solicitudes</Link>
-        <Link to="/panel/customers" aria-current={onCustomers ? 'page' : undefined}>Clientes</Link>
+        {isCashier ? <Link to="/panel/collections" aria-current="page">Cobros</Link> : <>
+          <Link to="/panel" aria-current={!onUsers && !onCustomers ? 'page' : undefined}>Solicitudes</Link>
+          <Link to="/panel/customers" aria-current={onCustomers ? 'page' : undefined}>Clientes</Link>
+        </>}
         {isAdmin && <Link to="/panel/users" aria-current={onUsers ? 'page' : undefined}>Usuarios</Link>}
       </nav>
       <main className="pn-main">{children}</main>
